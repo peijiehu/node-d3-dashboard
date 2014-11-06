@@ -10,6 +10,12 @@ var users = require('./routes/users');
 
 var app = express();
 
+var service = require('./service');
+service.yahooData("Sunny Vale, CA", "json", function(body) {
+    // console.log(body);
+});
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

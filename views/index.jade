@@ -11,13 +11,23 @@ body
   p Welcome to #{title}
   div#hotleads_div(style="width: 600px; height: 400px;")
   div#visitors_div(style="width: 600px; height: 400px;")
-  script(src="/javascripts/yahoodata.js")
+  div.chart(style="font: 10px sans-serif; background-color: steelblue; text-align: right; padding: 3px; margin: 1px; color: white;")
+  script(src="/javascripts/datacharting.js")
   script.
-      getDataFromYahoo("Sunny Value, CA", "json");
+    getRawData();
   script.
-      request("http://www.google.com", function (error, response, body) {
-          if (!error && response.statusCode === 200) {
-              console.log(body) // Print the json response
-              document.write(body);
-          }
-      });
+    var service = require('../service.js');
+    service.yahooData("Sunny Vale, CA", "json", function(body) {
+      document.write("to write body...");
+      console.log(body);
+    });
+  script.
+    document.write("load anything");
+  button(onclick="document.getElementById('demo').innerHTML = Date()") click here
+  p#demo
+  form#yahoo_data(action='/response-chart')
+    label location 
+    input#yahoo_location(type='text', name="yahoo_location")
+    label response format
+    input#response_format(type='text', name="response_format")
+    button#yahoo_submit(type='submit') submit
