@@ -12,9 +12,13 @@ router.get('/helloworld', function(req, res) {
     res.render('helloworld', { title: 'Hello, World!!!!!!' })
 });
 
-/* POST */
-router.get('/response-chart', function(req, res) {
-    res.render('response-chart', { title: req.body.yahoo_location })
-});
+
+router.get('/api', service.yahooData);
+
+router.get('/searching', service.searchJob);
+
+// router.get('/api', function(req, res) {
+// 	service.googleData(req, res);
+// });
 
 module.exports = router;

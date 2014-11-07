@@ -1,0 +1,29 @@
+{
+  "name": "nodetest1",
+  "version": "0.0.0",
+  "homepage": "https://github.com/tradev-pj/nodetest1",
+  "authors": [
+    "Peijie Hu <phu@rent.com>"
+  ],
+  "description": "node.js express jQuery d3.js api web app",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "node",
+    "js",
+    "express",
+    "d3",
+    "api"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

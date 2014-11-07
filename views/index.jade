@@ -5,6 +5,9 @@ html(lang="en")
     script(src="https://www.google.com/jsapi")
     script(src="/javascripts/googlechart.visitors.js")
     script(src="/javascripts/googlechart.hotleads.js")
+    script(src="/bower_components/jquery/src/jquery.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+    script(src="/javascripts/datacharting.js")
 
 body
   h1= title
@@ -12,22 +15,9 @@ body
   div#hotleads_div(style="width: 600px; height: 400px;")
   div#visitors_div(style="width: 600px; height: 400px;")
   div.chart(style="font: 10px sans-serif; background-color: steelblue; text-align: right; padding: 3px; margin: 1px; color: white;")
-  script(src="/javascripts/datacharting.js")
-  script.
-    getRawData();
-  script.
-    var service = require('../service.js');
-    service.yahooData("Sunny Vale, CA", "json", function(body) {
-      document.write("to write body...");
-      console.log(body);
-    });
-  script.
-    document.write("load anything");
-  button(onclick="document.getElementById('demo').innerHTML = Date()") click here
-  p#demo
-  form#yahoo_data(action='/response-chart')
+  input#search(type='search', placeholder="Search")
+  h2#results
+  form#yahoo_data(action='/api')
     label location 
     input#yahoo_location(type='text', name="yahoo_location")
-    label response format
-    input#response_format(type='text', name="response_format")
     button#yahoo_submit(type='submit') submit
