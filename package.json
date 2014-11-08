@@ -15,6 +15,7 @@
     "jade": "~1.6.0",
     "mongodb": "*",
     "monk": "*",
-    "nodemon": "*"
+    "nodemon": "*",
+    "jquery": "*"
   }
 }
