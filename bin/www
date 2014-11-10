@@ -4,6 +4,16 @@ var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
 
+// 'development' is the default value for NODE_ENV
+if (app.get('env') === 'development') {
+    console.log('running development');
+}
+
+// run in production by setting NODE_ENV=production
+if (app.get('env') === 'production') {
+    console.log('running production');
+}
+
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
 });
