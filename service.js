@@ -4,18 +4,7 @@ var request = require("request");
  * Created by phu on 11/4/14.
  */
 /* Call API to fetch data */
-// query "Sunny Vale, CA"
-// format "json"
-// module.exports.yahooData = function (query, format, callback) {
-//     format = format.toLowerCase();
-//     var url = "http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text=\""+query+"\"&format="+format;
 
-//     request(url, function (error, response, body) {
-//         if (!error && response.statusCode === 200) {
-//             callback(body);
-//         }
-//     });
-// }
 
 module.exports.yahooData = function (req, res) {
     query = req.query.yahoo_location;
@@ -43,7 +32,6 @@ module.exports.googleData = function (req, res) {
 }
 
 module.exports.searchJob = function(req, res){
-
 	// input value from search
 	var val = req.query.search;
 	// console.log(val);
@@ -70,8 +58,4 @@ module.exports.searchJob = function(req, res){
 	  // pass back the results to client side
 		res.send(craig);
 	});
-
-	// testing the route
-	// res.send("WHEEE");
-
 }
