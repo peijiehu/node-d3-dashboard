@@ -33,7 +33,7 @@ if (app.get('env') === 'development') {
 }
 
 // production logging
-// application log configured in utils/logger.js will go to logs/app.log
+// application log by winston (configured in utils/logger.js) will go to logs/app.log
 // access log by morgan will go to logs/access.log
 if (app.get('env') === 'production') {
     app.use(morgan('common', {stream: accessLogStream}));

@@ -4,12 +4,12 @@ winston.emitErrs = true;
 var logger = new winston.Logger({
     transports: [
         new winston.transports.File({
-            level: 'info',
+            level: 'debug',
             filename: './logs/app.log',
             handleExceptions: true,
             json: false,
             maxsize: 5242880, //5MB
-            maxFiles: 5,
+            maxFiles: 1,
             colorize: true
         }),
         new winston.transports.Console({

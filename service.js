@@ -1,4 +1,5 @@
 var request = require("request");
+var logger = require("./utils/logger");
 
 /**
  * Created by phu on 11/4/14.
@@ -12,7 +13,6 @@ module.exports.yahooData = function (req, res) {
 
     request(url, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log(body);
             res.send(body);
 	    }
     });
@@ -25,7 +25,6 @@ module.exports.googleData = function (req, res) {
 // http://finance.yahoo.com/webservice/v1/symbols/aapl/quote?format=json
     request(url, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log(body);
             res.send(body);
 	    }
     });
@@ -37,9 +36,6 @@ module.exports.searchJob = function(req, res){
 	// console.log(val);
 
 	// url used to search yql
-	// var url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20craigslist.search" +
-	// "%20where%20location%3D%22sfbay%22%20and%20type%3D%22jjj%22%20and%20query%3D%22" + val + "%22&format=" +
-	// "json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 	var url = "http://query.yahooapis.com/v1/public/yql?q=select * from geo.places where text=\""+val+"\"&format=json";
 	// console.log(url);
 
@@ -58,4 +54,26 @@ module.exports.searchJob = function(req, res){
 	  // pass back the results to client side
 		res.send(craig);
 	});
+}
+
+module.exports.getdata_1 = function (req, res) {
+    var url = "http://finance.yahoo.com/webservice/v1/symbols/aapl/quote?format=json";
+    logger.debug("Making request to "+url);
+    request(url, function (error, response, body) {
+    	logger.debug("Response statusCode: "+response.statusCode);
+        if (!error && response.statusCode === 200) {
+            res.send(body);
+	    }
+    });
+}
+
+module.exports.getdata_2 = function (req, res) {
+    var url = "http://finance.yahoo.com/webservice/v1/symbols/tsla/quote?format=json";
+    logger.debug("Making request to "+url);
+    request(url, function (error, response, body) {
+    	logger.debug("Response statusCode: "+response.statusCode);
+        if (!error && response.statusCode === 200) {
+            res.send(body);
+	    }
+    });
 }
