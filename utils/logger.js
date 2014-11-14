@@ -3,8 +3,9 @@ winston.emitErrs = true;
 
 var logger = new winston.Logger({
     transports: [
-        new winston.transports.File({
+        new winston.transports.DailyRotateFile({
             level: 'debug',
+            datePattern: '.yyyy-MM-dd',
             filename: './logs/app.log',
             handleExceptions: true,
             json: false,
@@ -21,6 +22,10 @@ var logger = new winston.Logger({
     ],
     exitOnError: false
 });
+
+// TODO: rotate log files, keep recent 7 days?
+//       Two ways: write a rotatelog.js in utils to handle it internally;
+//                 using unix logrotate to handle it externally
 
 module.exports = logger;
 module.exports.stream = {

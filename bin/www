@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-var debug = require('debug')('nodetest1');
+var logger = require("../utils/logger");
 var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
 
 // 'development' is the default value for NODE_ENV
 if (app.get('env') === 'development') {
-    console.log('running development');
+    logger.debug('Server running in development mode');
 }
 
 // run in production by setting NODE_ENV=production
 if (app.get('env') === 'production') {
-    console.log('running production');
+    logger.debug('Server running in production mode');
 }
 
 var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
+  logger.debug('Server listening on port ' + server.address().port);
 });
