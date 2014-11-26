@@ -1,8 +1,8 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
     include ./includes/head
-  body
+  body(class=bodyClassVar)
+    include ./includes/nav
+    div#fortest
     block content

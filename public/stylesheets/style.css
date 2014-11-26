@@ -7,18 +7,6 @@ a {
   color: #00B7FF;
 }
 
-.bar {
-  fill: steelblue;
-}
-
-.bar:hover {
-  fill: brown;
-}
-
-.axis {
-  font: 10px sans-serif;
-}
-
 .axis path,
 .axis line {
   fill: none;
@@ -26,6 +14,36 @@ a {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
+.axis {
+	font: 10px, sans-serif;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.bar {
+	fill: steelblue;
+}
+
+.bar:hover {
+	fill: dodgerblue;
+}
+
+.tooltip-div {
+        opacity: 0;
+        position: absolute;
+        width: 100px;
+        height: auto;
+        padding: 5px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
 }

@@ -1,0 +1,21 @@
+{
+  "name": "node-dashboard-d3",
+  "version": "0.0.0",
+  "authors": [
+    "Peijie Hu <tradev.pj@gmail.com>"
+  ],
+  "description": "dashboard web app node.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "d3": "~3.4.13",
+    "underscore": "~1.7.0"
+  }
+}

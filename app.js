@@ -6,9 +6,11 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var morgan = require('morgan');
 var logger = require("./utils/logger");
+logger.debug("Overriding 'Express' logger");
+// application log by winston (configured in utils/logger.js) will be in both console and app.xxxx log files
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var pageRoutes = require('./routes/page-routes');
+var dataRoutes = require('./routes/data-routes');
 
 var app = express();
 
@@ -21,20 +23,13 @@ app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
 
-// logging
-
-logger.debug("Overriding 'Express' logger");
-
+// logging access log
 var accessLogStream = fs.createWriteStream(__dirname + '/logs/access.log', {flags: 'a'});
-
-// development logging, everything will be in console
+// development log by morgan will be in console
 if (app.get('env') === 'development') {
     app.use(morgan('dev'));
 }
-
-// production logging
-// application log by winston (configured in utils/logger.js) will go to logs/app.log
-// access log by morgan will go to logs/access.log
+// production access log by morgan will go to logs/access.log
 if (app.get('env') === 'production') {
     app.use(morgan('common', {stream: accessLogStream}));
 }
@@ -45,9 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
-
+app.use('/', [pageRoutes, dataRoutes]);
 
 
 // catch 404 and forward to error handler
