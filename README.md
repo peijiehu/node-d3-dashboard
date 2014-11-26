@@ -6,6 +6,11 @@ Description
 This node.js based web app can be used as a template where logged in users can assess historical and monitor live data, which are visualized by d3.js, from API you speficied.
 
 ==========================
+Demo
+
+  https://node-webstats-dashboard.herokuapp.com/
+  
+==========================
 Installation
 
   To obtain a copy of the source code:
