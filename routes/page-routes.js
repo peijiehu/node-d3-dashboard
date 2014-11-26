@@ -25,4 +25,10 @@ router.get('/performance/webapp', function(req, res) {
     res.render(page, { title: page, bodyClassVar: page });
 });
 
+/* GET signin page. */
+router.get('/signin', function(req, res) {
+	var page = 'signin';
+    res.render(page, { title: page, bodyClassVar: page });
+});
+
 module.exports = router;
