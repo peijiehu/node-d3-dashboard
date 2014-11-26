@@ -12,7 +12,7 @@ module.exports.getRRData = function (req, res) {
             res.send(res_data);
         }
     });
-}
+};
 
 module.exports.getTrafficData = function (req, res) {
     var url = "http://finance.yahoo.com/webservice/v1/symbols/aapl/quote?format=json";
@@ -25,7 +25,7 @@ module.exports.getTrafficData = function (req, res) {
             res.send(res_data);
 	    }
     });
-}
+};
 
 var myUrl = "";
 var myKey = "";
@@ -54,4 +54,4 @@ module.exports.getYahooData = function (req, res) {
             }
         }
     );
-}
+};

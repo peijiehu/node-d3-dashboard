@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "//": "'start' below is the script to start app, command 'npm start' runs this script",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
