@@ -5,7 +5,7 @@ var service = require('../service.js');
 /* GET fetch data for each metric */
 
 // registration
-router.get('/rr.json', service.getRRData);
+router.get('/reg.json', service.getRRData);
 
 router.get('/traffic.json', service.getRRData);
 

@@ -4,5 +4,10 @@ html
     include ./includes/head
   body(class=bodyClassVar)
     include ./includes/nav
-    div#fortest
-    block content
+    div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      title= title
+      h1= title
+      p Welcome to #{title}
+      div#timestamp_last_generated
+      div#fortest
+      block content

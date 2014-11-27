@@ -8,17 +8,17 @@ $(function(){
 
 // show charts for all data
 function showAllData() {
-    oneCall('/rr');
+    oneCall('/reg');
     oneCall('/traffic');
 }
 
-// kpi/rr
+// reg
 $(function(){
-	if ($("body.rr").length > 0) {
-		oneCall('/rr');
+	if ($("body.reg").length > 0) {
+		oneCall('/reg');
 		setInterval( 
 			function(){
-				oneCall('/rr');
+				oneCall('/reg');
 			}, 
 			60000 
 		);

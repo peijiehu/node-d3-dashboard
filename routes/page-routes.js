@@ -4,12 +4,12 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
     var page = 'index';
-    res.render(page, { title: 'Dashboard', bodyClassVar: page });
+    res.render(page, { title: 'Overview', bodyClassVar: page });
 });
 
 /* GET RR metrics page. */
-router.get('/rr', function(req, res) {
-	var page = 'rr';
+router.get('/reg', function(req, res) {
+	var page = 'reg';
     res.render(page, { title: page, bodyClassVar: page });
 });
 
