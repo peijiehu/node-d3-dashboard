@@ -2,7 +2,7 @@
 $(function(){
 	if ($("body.index").length > 0) {
 		showAllData();
-		setInterval(showAllData, 60000);
+		setInterval(showAllData, 6000);
 	}
 });
 
@@ -20,7 +20,7 @@ $(function(){
 			function(){
 				oneCall('/reg');
 			}, 
-			60000 
+			6000
 		);
 	}
 });
@@ -33,19 +33,22 @@ $(function(){
 			function(){
 				oneCall('/traffic');
 			}, 
-			60000 
+			6000
 		);
 	}
 });
 
 // define size parameters for all charts that are created below
 var margin = {top: 20, right: 40, bottom: 30, left: 40},
-    width = 800 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom,
     textFont = "14px",
     parsedTextFont = parseFloat(textFont),
-	parseDate = d3.time.format("%d-%b-%y").parse,
-    formatDate = d3.time.format("%d-%b"),
+    // parse date based on format of input data
+	parseDate = d3.time.format("%d-%B-%y").parse,
+	// defines the format of date to be shown on charts
+	// %b - abbreviated month name, %d - zero-padded day of the month as a decimal number [01,31]
+    formatDate = d3.time.format("%b-%d"),
     bisectDate = d3.bisector(function(d) { return d.date; }).left;
 
 /**
@@ -234,25 +237,27 @@ function drawBarChart(dataset, dataRoute) {
 					{ date: "13-May-12", value: 15, value_desktop: 7, value_mobile: 8 },
 					{ date: "14-May-12", value: 20, value_desktop: 11, value_mobile: 9 },
 					{ date: "15-May-12", value: 18, value_desktop: 10, value_mobile: 8 }];
-	var xScale = d3.scale.ordinal()
-					.domain(d3.range(dataset.length))
-					.rangeRoundBands([0, width], 0.1); 
+	
+	dataset.forEach(function(d) {
+	    d.date = parseDate(d.date);
+	});
 
-	var yScale = d3.scale.linear()
+	var xScale = d3.scale.ordinal() // discrete, one slot per element
+					.domain(dataset.map( function(d){return d.date;} ))
+					.rangeRoundBands([0, width], 0.1); // padding between two bars = 0.1
+
+	var yScale = d3.scale.linear() // continuous values
 					.domain([0, d3.max(dataset, function(d) {return d.value;})])
-					.range([0, height]);
+					.range([height, 0]);
 
 	var xAxis = d3.svg.axis()
 	              .scale(xScale)
-	              .orient("bottom");
+	              .orient("bottom")
+	              .tickFormat(formatDate);
 
 	var yAxis = d3.svg.axis()
 	 			  .scale(yScale)
 	 			  .orient("left");
-
-	var key = function(d) {
-		return d.date;
-	};
 
     // the div will be selected and assigned to chartDiv if it exists
     // if this div doesn't exist on web page(html/jade), will NOT generate the chart
@@ -270,7 +275,7 @@ function drawBarChart(dataset, dataRoute) {
 
 	svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
+        .attr("transform", "translate(0," + height + ")") // starting from bottom left of svg
   		.call(xAxis);
 
     svg.append("g")
@@ -279,19 +284,19 @@ function drawBarChart(dataset, dataRoute) {
 
 	//Create bars
 	svg.selectAll("bar")
-	   .data(dataset, key)
+	   .data(dataset)
 	   .enter()
 	   .append("rect")
 	   .attr("class", "bar")
-	   .attr("x", function(d, i) {
-			return xScale(i);
+	   .attr("x", function(d) {
+			return xScale(d.date);
 	   })
 	   .attr("y", function(d) {
-			return height - yScale(d.value);
+			return yScale(d.value);
 	   })
 	   .attr("width", xScale.rangeBand())
 	   .attr("height", function(d) {
-			return yScale(d.value);
+			return height - yScale(d.value);
 	   })
 	   //Tooltip
 	   .on("mouseover", function(d) {
@@ -304,7 +309,7 @@ function drawBarChart(dataset, dataRoute) {
 		       .style("top", yPosition+"px")
 		       .style("opacity", ".8");
 		    tooltipDiv.select(".tooltip-text")
-					  .text(d.date);
+					  .text(formatDate(d.date));
   		    tooltipDiv.select(".tooltip-text") // TODO need to change new line for value
   		              .append("span")
 					  .text(d.value);
@@ -351,7 +356,8 @@ function drawLineChart(dataset, dataRoute) {
 
 	var xAxis = d3.svg.axis()
 	    .scale(x)
-	    .orient("bottom");
+	    .orient("bottom")
+        .tickFormat(formatDate);
 
 	var yAxis = d3.svg.axis()
 	    .scale(y)
