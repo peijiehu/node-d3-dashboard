@@ -21,14 +21,14 @@ var logger = new winston.Logger({
             json: false,
             colorize: true,
             timestamp: function(){ return new Date(); }
-        }),
-        new winston.transports.Syslog({
-            level: 'warning',
-            host: '172.26.48.135',
-            port: '514',
-            protocol: 'udp4',
-            localhost: 'peijie-office-mac'
         })
+        // new winston.transports.Syslog({
+        //     level: 'warning',
+        //     host: '1.1.1.1',
+        //     port: '123',
+        //     protocol: 'udp4',
+        //     localhost: 'my-localhost'
+        // })
     ],
     exitOnError: false
 });
