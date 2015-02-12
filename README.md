@@ -16,7 +16,7 @@ Installation
   To obtain a copy of the source code:
 
     $ git clone 
-    $ cd node-dashboard-d3
+    $ cd node-d3-dashboard
   
   To install dependencies needed for backend:
 
